@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Dictionar</title>
+  </head>
+  <body>
+    <h1><strong>DICȚIONAR</strong></h1>
+    <form> 
+        <p> INTRODU AICI CUVÂNTUL DORIT </p>
+        <button type = "button" class = "findWord">Caută</button>
+        <input type = "text" class = "input"/> 
+        <button type = "button" class = "addword">Adaugă</button>
+    </form>
+    <div class = "output" style = "margin-top: 0.6%"></div> 
+    <div class = "list" style = "margin-top: 0.3%; margin-left: 3%;"></div>
+    
+    
+  </body>
+  <script>
+    const findword = document.querySelector(".findWord");
+    const addword = document.querySelector(".addword");
+    const list = document.querySelector(".list");
+    const input = document.querySelector(".input");
+    const output = document.querySelector(".output");
+
+    let wordsCnt = 0;
+    let wordList = new Array(wordsCnt);
+
+    function addWord() {
+      ++wordsCnt;
+      wordList[wordsCnt] = document.createElement('div');
+      wordList[wordsCnt].textContent = input.value;
+      list.insertAdjacentElement("afterbegin", wordList[wordsCnt]);
+    }
+
+    function findWord() {
+      resetOutput();
+      let found = 0;
+      for (let i = 1; i <= wordsCnt && !found; ++i) {
+        if (input.value === wordList[i].textContent) {
+          output.textContent = "CUVÂNTUL CĂUTAT SE AFLĂ ÎN DICȚIONAR";
+          found = 1;
+        }
+      }
+      if (found === 0) {
+        output.textContent = "CUVÂNTUL CĂUTAT NU SE AFLĂ ÎN DICȚIONAR";
+      }
+    }
+
+    function resetOutput() {
+      output.textContent = " ";
+    }
+
+    addword.addEventListener('click', addWord);
+    findword.addEventListener('click', findWord);
+    input.addEventListener('click', resetOutput);
+
+  </script>
+</html>
